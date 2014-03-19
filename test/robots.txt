@@ -6,13 +6,10 @@ Test Teardown  Close Browser
 *** Test Cases ***
 Create a person
   [template]  create a person
-  Joseph  Coach  Success
-  Joseph  ${empty}  Success
+  Joseph    Coach     Success
+  Joseph    ${empty}  Success
+  ${empty}  Coach     Name is required
 
-
-Name is required
-  When create a person with  ${EMPTY}  Coach
-  Then fail
 
 
 *** Keywords ***
@@ -20,9 +17,7 @@ create a person
   [Arguments]  ${name}  ${title}  ${result}
   When create a person with  ${name}  ${title}
   run keyword if  '${result}'=='Success'  success with  ${name}  ${title}
-  # run keyword if  ${result}=="Fail"  success with  ${name}  ${title}
-  
-
+  run keyword unless  '${result}'=='Success'  fail with  ${result}
 
 create a person with
   [Arguments]  ${name}  ${title}
@@ -36,6 +31,6 @@ success with
   page should contain  ${name}
   page should contain  ${title}
 
-fail
-  page should contain  Name is required
-
+fail with
+  [Arguments]  ${result}
+  page should contain  ${result}
