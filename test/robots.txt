@@ -1,11 +1,14 @@
 *** Settings ***
 Library  Selenium2Library
+Test Setup  Open Browser  http://localhost:4567/
 Test Teardown  Close Browser
 
 *** Test Cases ***
 Create a person
-  When create a person with  Joseph  Coach
-  Then success with  Joseph  Coach
+  [template]  create a person
+  Joseph  Coach  Success
+  Joseph  ${empty}  Success
+
 
 Name is required
   When create a person with  ${EMPTY}  Coach
@@ -13,9 +16,17 @@ Name is required
 
 
 *** Keywords ***
+create a person
+  [Arguments]  ${name}  ${title}  ${result}
+  When create a person with  ${name}  ${title}
+  run keyword if  '${result}'=='Success'  success with  ${name}  ${title}
+  # run keyword if  ${result}=="Fail"  success with  ${name}  ${title}
+  
+
+
 create a person with
   [Arguments]  ${name}  ${title}
-  Open Browser  http://localhost:4567/
+  go to  http://localhost:4567/
   input text  name=name  ${name}
   input text  name=title  ${title}
   submit form
