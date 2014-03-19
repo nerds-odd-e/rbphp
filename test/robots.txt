@@ -1,0 +1,17 @@
+*** Settings ***
+Library  Selenium2Library
+
+*** Test Cases ***
+Create a person
+  When create a person with  Joseph  Coach
+  Then success
+
+
+*** Keywords ***
+create a person with
+  [Arguments]  ${name}  ${title}
+  no operation
+
+success
+  Open Browser  http://baidu.com/  safari
+  page should contain  Success

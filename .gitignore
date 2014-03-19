@@ -12,6 +12,9 @@ test/tmp
 test/version_tmp
 tmp
 
+*.html
+*.xml
+
 # YARD artifacts
 .yardoc
 _yardoc
