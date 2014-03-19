@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Directory</title>
+</head>
+<body>
+  <% @persons.each do |person| %>
+    <div><span><%= person.name %> <%= person.title %></span></div>
+  <% end %>
+</body>
+</html>

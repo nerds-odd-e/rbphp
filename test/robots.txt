@@ -5,7 +5,11 @@ Test Teardown  Close Browser
 *** Test Cases ***
 Create a person
   When create a person with  Joseph  Coach
-  Then success
+  Then success with  Joseph  Coach
+
+Name is required
+  When create a person with  ${EMPTY}  Coach
+  Then fail
 
 
 *** Keywords ***
@@ -16,5 +20,11 @@ create a person with
   input text  name=title  ${title}
   submit form
 
-success
-  page should contain  Success
+success with
+  [Arguments]  ${name}  ${title}
+  page should contain  ${name}
+  page should contain  ${title}
+
+fail
+  page should contain  Name is required
+
