@@ -14,6 +14,7 @@ tmp
 
 *.html
 *.xml
+*.png
 
 # YARD artifacts
 .yardoc

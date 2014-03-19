@@ -1,5 +1,6 @@
 *** Settings ***
 Library  Selenium2Library
+Test Teardown  Close Browser
 
 *** Test Cases ***
 Create a person
@@ -10,8 +11,10 @@ Create a person
 *** Keywords ***
 create a person with
   [Arguments]  ${name}  ${title}
-  no operation
+  Open Browser  http://localhost:4567/
+  input text  name=name  ${name}
+  input text  name=title  ${title}
+  submit form
 
 success
-  Open Browser  http://baidu.com/  safari
   page should contain  Success
