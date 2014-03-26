@@ -20,6 +20,10 @@ post '/' do
   if person.name.length > 20
     redirect_with_message 'Name is too long'
   end
+
+  if !person.name.match('^[a-z,A-Z]')
+    redirect_with_message 'Name should start with alphabet'
+  end
  
   @persons.push(person)
   redirect to('/list')
