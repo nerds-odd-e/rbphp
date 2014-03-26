@@ -10,6 +10,7 @@ Create a person
   Joseph                      ${empty}  Success
   ${empty}                    Coach     Name is required
   Name Longer Than 20 chars   Coach     Name is too long
+  3Joseph                     Coach     Name should start with alphabet
 
 
 *** Keywords ***
