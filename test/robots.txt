@@ -7,11 +7,15 @@ Test Teardown  Close Browser
 Create a person
   [template]  create a person
   Joseph                      Coach     Success
-  Joseph                      ${empty}  Success
+  Jackson                     ${empty}  Success
   ${empty}                    Coach     Name is required
   Name Longer Than 20 chars   Coach     Name is too long
   3Joseph                     Coach     Name should start with alphabet
 
+Name should not be duplicated
+  Given there is an existing person  Joseph  Coach
+  When create a person with  Joseph  Worker
+  Then fail with  Name should not be duplicated
 
 *** Keywords ***
 create a person
@@ -26,6 +30,10 @@ create a person with
   input text  name=name  ${name}
   input text  name=title  ${title}
   submit form
+
+there is an existing person
+  [Arguments]  ${name}  ${title}
+  create a person with  ${name}  ${title}
 
 success with
   [Arguments]  ${name}  ${title}
