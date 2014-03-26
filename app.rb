@@ -17,6 +17,10 @@ post '/' do
     redirect to('/?result=Name is required')
   end
 
+  if person.name.length > 20
+    redirect to('/?result=Name is too long')
+  end
+  
   @persons.push(person)
   redirect to('/list')
 end
