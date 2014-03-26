@@ -14,13 +14,13 @@ post '/' do
   person.title = request["title"]
 
   if person.name.empty?
-    redirect to('/?result=Name is required')
+    redirect_with_message 'Name is required'
   end
 
   if person.name.length > 20
-    redirect to('/?result=Name is too long')
+    redirect_with_message 'Name is too long'
   end
-  
+ 
   @persons.push(person)
   redirect to('/list')
 end
@@ -28,4 +28,8 @@ end
 get '/list' do
   @persons = settings.persons
   erb :list
+end
+
+def redirect_with_message message
+  redirect to "/?result=#{message}"
 end
