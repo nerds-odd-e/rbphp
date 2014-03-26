@@ -24,6 +24,11 @@ post '/' do
   if !person.name.match('^[a-z,A-Z]')
     redirect_with_message 'Name should start with alphabet'
   end
+
+  existingPersons = @persons.select {|existing| existing.name == person.name}
+  if existingPersons.length > 0
+    redirect_with_message 'Name should not be duplicated'
+  end
  
   @persons.push(person)
   redirect to('/list')
