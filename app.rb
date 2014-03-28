@@ -1,6 +1,10 @@
 require 'sinatra'
 require './person'
 
+configure do
+  set :bind, "0.0.0.0"
+end
+
 set :persons, []
 
 get '/' do
